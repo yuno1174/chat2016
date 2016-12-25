@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>チャット2016・メイン</title>
+</head>
+<body>
+	<wicket:extend>
+		<h2>ログインした</h2>
+		<a href="">ログアウト</a>
+
+		<div class="container" wicket:id="messageComponent">
+			<table class="table table-bordered table-hover table-striped"
+				style="width: 80%; margin: auto;">
+				<thead>
+					<tr>
+						<th>メッセージ</th>
+						<th>投稿者</th>
+						<th>投稿日時</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr wicket:id = "messageList">
+						<td wicket:id = "message">ガルパンはいいぞぉ</td>
+						<td wicket:id = "accountName">ガルパンおじさん</td>
+						<td wicket:id = "postTime">1960-01-01</td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="btn btn-default" wicket:id="messageReloadLink">メッセージ更新</button>
+		</div>
+	</wicket:extend>
+</body>
+</html>
