@@ -37,20 +37,6 @@ public class MessageBean implements Serializable{
 	}
 
 	/**
-	 * @return name
-	 */
-	public String getName() {
-		return message;
-	}
-
-	/**
-	 * @param name セットする name
-	 */
-	public void setName(String name) {
-		this.message = name;
-	}
-
-	/**
 	 * @return message
 	 */
 	public String getMessage() {

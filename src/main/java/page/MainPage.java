@@ -1,7 +1,5 @@
 package page;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -13,17 +11,29 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.util.ListModel;
 
-import bean.AccountBean;
+import com.google.inject.Inject;
+
 import bean.MessageBean;
 import common.ChatCommonPage;
+import service.IMessageService;
+import service.MessageService;
 
 public class MainPage extends ChatCommonPage {
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	IMessageService messageService;
+
 	public MainPage() {
 		super();
 
-		IModel<List<MessageBean>> messageListModel = new ListModel<MessageBean>(getMessage());
+
+		final IModel<List<MessageBean>> messageListModel = new ListModel<MessageBean>(){;
+			@Override
+			public List<MessageBean> getObject() {
+				return new MessageService().select();
+			}
+		};
 
 
 		final WebMarkupContainer messageComponent = new WebMarkupContainer("messageComponent"){
@@ -48,6 +58,8 @@ public class MainPage extends ChatCommonPage {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
+				messageListModel.getObject().remove(2);
+
 				target.add(messageComponent);
 			}
 		};
@@ -58,16 +70,4 @@ public class MainPage extends ChatCommonPage {
 		this.add(messageComponent);
 
     }
-	private List<MessageBean> getMessage(){
-
-		List<MessageBean> list = new ArrayList<MessageBean>();
-		list.add(new MessageBean(1,"ガルパンはいいぞぉ",
-				new AccountBean(1,"ガルパンおじさん",null,false)
-				,Date.valueOf("2016-12-24")));
-		list.add(new MessageBean(2,"やったぜ",
-				new AccountBean(2,"変態糞土方",null,false)
-				,Date.valueOf("2016-12-25")));
-
-		return list;
-	}
 }

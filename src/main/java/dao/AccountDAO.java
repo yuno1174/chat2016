@@ -61,7 +61,6 @@ public class AccountDAO {
 					accounts.add(new AccountBean(
 							results.getLong("id"),
 							results.getString("name"),
-							results.getString("password"),
 							results.getBoolean("isAdmin")));
 				}
 			}
