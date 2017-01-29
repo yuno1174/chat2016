@@ -2,32 +2,25 @@ package service;
 
 import java.util.List;
 
-import bean.MessageBean;
+import bean.Message;
 import dao.MessageDAO;
 
 public class MessageService implements IMessageService {
 
 	@Override
-	public void insert() {
-		// TODO 自動生成されたメソッド・スタブ
-
+	public int insert(Message message) {
+		MessageDAO dao = null;
+		try {
+			dao = new MessageDAO();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return dao.insert(message);
 	}
 
 	@Override
-	public void update() {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
-	@Override
-	public void delete() {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
-	@Override
-	public List<MessageBean> select() {
-		List<MessageBean> list = null;
+	public List<Message> select() {
+		List<Message> list = null;
 		try {
 			list = new MessageDAO().select();
 		} catch (ClassNotFoundException e) {

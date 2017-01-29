@@ -1,6 +1,10 @@
 package service;
 
+import java.util.List;
+
 import com.google.inject.ImplementedBy;
+
+import bean.Account;
 
 /**
  * アカウントに関連する抽象クラス
@@ -11,13 +15,13 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(AccountService.class)
 public interface IAccountService {
 
-	public void insert();
+	public int insert();
 
-	public void update();
+	public int update();
 
-	public void delete();
+	public List<Account> select();
 
-	public void select();
+	public Account select(String id, String password);
 
 	public boolean existsAccount(String id, String pass);
 }

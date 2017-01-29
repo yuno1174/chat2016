@@ -2,17 +2,17 @@ package bean;
 
 import java.io.Serializable;
 
-public class AccountBean implements Serializable{
+public class Account implements Serializable{
 
 	private long id;
 	private String name;
 	private boolean isAdmin;
 
-	public AccountBean() {
+	public Account() {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	public AccountBean(long id, String name, boolean isAdmin){
+	public Account(long id, String name, boolean isAdmin){
 		this.id = id;
 		this.name = name;
 		this.isAdmin = isAdmin;

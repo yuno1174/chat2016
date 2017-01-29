@@ -1,5 +1,9 @@
 package service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bean.Account;
 import dao.AccountDAO;
 
 /**
@@ -17,23 +21,30 @@ public class AccountService implements IAccountService {
 	}
 
 	@Override
-	public void insert() {
-		// TODO 自動生成されたメソッド・スタブ
+	public int insert() {
+		return 0;
 	}
 
 	@Override
-	public void update() {
-		// TODO 自動生成されたメソッド・スタブ
+	public int update() {
+		return 0;
 	}
 
 	@Override
-	public void delete() {
-		// TODO 自動生成されたメソッド・スタブ
+	public List<Account> select() {
+		return new ArrayList<Account>();
 	}
 
 	@Override
-	public void select() {
-		// TODO 自動生成されたメソッド・スタブ
+	public Account select(String id, String password) {
+		if(!id.isEmpty() && !password.isEmpty()){
+			try {
+				return new AccountDAO().select(id, password);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return new Account();
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.inject.ImplementedBy;
 
-import bean.MessageBean;
+import bean.Message;
 
 /**
  * アカウントに関連する抽象クラス
@@ -15,11 +15,7 @@ import bean.MessageBean;
 @ImplementedBy(MessageService.class)
 public interface IMessageService {
 
-	public void insert();
+	public int insert(Message message);
 
-	public void update();
-
-	public void delete();
-
-	public List<MessageBean> select();
+	public List<Message> select();
 }

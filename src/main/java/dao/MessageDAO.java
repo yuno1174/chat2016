@@ -2,14 +2,15 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.AccountBean;
-import bean.MessageBean;
+import bean.Account;
+import bean.Message;
 import difinition.DBSettingDefinition;
 
 /**
@@ -30,8 +31,31 @@ public class MessageDAO {
 	/**
 	 * 挿入メソッド
 	 */
-	public void insert() {
+	public int insert(Message message) {
 
+		int ret = -1;
+
+		StringBuilder sql = new StringBuilder();
+
+
+		sql.append("insert into message(accountid, message, posttime) ");
+		sql.append("values(?,?,?) ");
+
+		try(Connection conn = DriverManager.getConnection(DBSettingDefinition.URL,
+				DBSettingDefinition.USER, DBSettingDefinition.PASS)){
+			try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+
+				pstmt.setLong(1, message.getAccountBean().getId());
+				pstmt.setString(2, message.getMessage());
+				pstmt.setTimestamp(3, message.getPostTime());
+
+				ret = pstmt.executeUpdate();
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 	/**
@@ -49,9 +73,9 @@ public class MessageDAO {
 	}
 
 
-	public List<MessageBean> select(){
+	public List<Message> select(){
 
-		List<MessageBean> list = new ArrayList<MessageBean>();
+		List<Message> list = new ArrayList<Message>();
 
 		StringBuilder sql = new StringBuilder();
 		sql.append("select A.id as accountid, ");
@@ -70,16 +94,16 @@ public class MessageDAO {
 
 				try(ResultSet results = stmt.executeQuery(sql.toString())){
 					while(results.next()){
-						AccountBean account = new AccountBean();
+						Account account = new Account();
 						account.setId(results.getLong("accountid"));
 						account.setName(results.getString("accountname"));
 						account.setAdmin(results.getBoolean("isadmin"));
 
-						MessageBean message = new MessageBean();
+						Message message = new Message();
 						message.setId(results.getLong("messageid"));
 						message.setMessage(results.getString("message"));
 						message.setAccountBean(account);
-						message.setPostTime(results.getDate("posttime"));
+						message.setPostTime(results.getTimestamp("posttime"));
 
 						list.add(message);
 					}

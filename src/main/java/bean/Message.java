@@ -1,21 +1,21 @@
 package bean;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
-public class MessageBean implements Serializable{
+public class Message implements Serializable{
 
 	private long id;
 	private String message;
-	private AccountBean accountBean;
-	private Date postTime;
+	private Account accountBean;
+	private Timestamp postTime;
 
-	public MessageBean() {
+	public Message() {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	public MessageBean(long id, String name,
-			AccountBean accountBean, Date postTime){
+	public Message(long id, String name,
+			Account accountBean, Timestamp postTime){
 		this.id = id;
 		this.message = name;
 		this.accountBean = accountBean;
@@ -53,28 +53,28 @@ public class MessageBean implements Serializable{
 	/**
 	 * @return accountBean
 	 */
-	public AccountBean getAccountBean() {
+	public Account getAccountBean() {
 		return accountBean;
 	}
 
 	/**
 	 * @param accountBean セットする accountBean
 	 */
-	public void setAccountBean(AccountBean accountBean) {
+	public void setAccountBean(Account accountBean) {
 		this.accountBean = accountBean;
 	}
 
 	/**
 	 * @return postTime
 	 */
-	public Date getPostTime() {
+	public Timestamp getPostTime() {
 		return postTime;
 	}
 
 	/**
 	 * @param postTime セットする postTime
 	 */
-	public void setPostTime(Date postTime) {
+	public void setPostTime(Timestamp postTime) {
 		this.postTime = postTime;
 	}
 

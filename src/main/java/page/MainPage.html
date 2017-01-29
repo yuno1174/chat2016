@@ -9,7 +9,7 @@
 		<h2>ログインした</h2>
 		<a href="">ログアウト</a>
 
-		<div class="container" wicket:id="messageComponent">
+		<div class="container" wicket:id="messageContainer">
 			<table class="table table-bordered table-hover table-striped"
 				style="width: 80%; margin: auto;">
 				<thead>
@@ -29,6 +29,10 @@
 			</table>
 			<button class="btn btn-default" wicket:id="messageReloadLink">メッセージ更新</button>
 		</div>
+		<form wicket:id="form">
+			テキスト:<input type="text" wicket:id="text" />
+			<button wicket:id="submit">送信</button>
+		</form>
 	</wicket:extend>
 </body>
 </html>

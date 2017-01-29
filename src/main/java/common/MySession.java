@@ -3,11 +3,11 @@ package common;
 import org.apache.wicket.protocol.http.WebSession;
 import org.apache.wicket.request.Request;
 
-import bean.AccountBean;
+import bean.Account;
 
-public class MySession extends WebSession{
+public final class MySession extends WebSession{
 
-	private AccountBean accountBean;
+	private Account accountBean;
 	private boolean loggedIn;
 
 	public MySession(Request request) {
@@ -22,14 +22,14 @@ public class MySession extends WebSession{
 	/**
 	 * @return accountBean
 	 */
-	public AccountBean getAccountBean() {
+	public Account getAccountBean() {
 		return accountBean;
 	}
 
 	/**
 	 * @param accountBean セットする accountBean
 	 */
-	public void setAccountBean(AccountBean accountBean) {
+	public void setAccountBean(Account accountBean) {
 		this.accountBean = accountBean;
 	}
 

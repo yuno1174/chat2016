@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.AccountBean;
+import bean.Account;
 import difinition.DBSettingDefinition;
 
 /**
@@ -41,24 +41,17 @@ public class AccountDAO {
 
 	}
 
-	/**
-	 * 削除メソッド
-	 */
-	public void delete() {
 
-	}
-
-
-	public List<AccountBean> select(){
+	public List<Account> select(){
 		String sql = "select * from account;";
-		List<AccountBean> accounts = new ArrayList<>();
+		List<Account> accounts = new ArrayList<>();
 
 		try(Connection conn = DriverManager.getConnection(DBSettingDefinition.URL,
 				DBSettingDefinition.USER, DBSettingDefinition.PASS)){
 			try(Statement stmt = conn.createStatement()){
 				ResultSet results = stmt.executeQuery(sql);
 				while (results.next()) {
-					accounts.add(new AccountBean(
+					accounts.add(new Account(
 							results.getLong("id"),
 							results.getString("name"),
 							results.getBoolean("isAdmin")));
@@ -68,6 +61,36 @@ public class AccountDAO {
 			e.printStackTrace();
 		}
 		return accounts;
+	}
+
+	public Account select(String name, String password){
+		StringBuilder sql = new StringBuilder();
+		sql.append("select id, name, isadmin ");
+		sql.append("from account ");
+		sql.append("where name = ? ");
+		sql.append("and password = ? ");
+
+		Account account = new Account();
+
+		try(Connection conn = DriverManager.getConnection(DBSettingDefinition.URL,
+				DBSettingDefinition.USER, DBSettingDefinition.PASS)){
+			try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+
+				pstmt.setString(1, name);
+				pstmt.setString(2, password);
+
+				try(ResultSet results = pstmt.executeQuery()){
+					if(results.next()){
+						account.setId(results.getLong("id"));
+						account.setName(results.getString("name"));
+						account.setAdmin(results.getBoolean("isAdmin"));
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return account;
 	}
 
 	public boolean existsAccount(String name, String password){

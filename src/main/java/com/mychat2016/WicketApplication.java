@@ -1,8 +1,13 @@
 package com.mychat2016;
 
 
+import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
+
+import common.MySession;
 
 /**
  * Application object for your web application.
@@ -29,5 +34,9 @@ public class WicketApplication extends WebApplication{
 		super.init();
 
 		// add your configuration here
+	}
+
+	public Session newSession(Request req, Response res) {
+		return new MySession(req);
 	}
 }
