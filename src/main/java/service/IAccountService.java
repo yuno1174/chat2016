@@ -15,13 +15,13 @@ import bean.Account;
 @ImplementedBy(AccountService.class)
 public interface IAccountService {
 
-	public int insert();
+	public int insert(String name, String password, boolean isAdmin);
 
 	public int update();
 
 	public List<Account> select();
 
-	public Account select(String id, String password);
+	public Account select(String name, String password);
 
-	public boolean existsAccount(String id, String pass);
+	public boolean existsAccount(String name);
 }

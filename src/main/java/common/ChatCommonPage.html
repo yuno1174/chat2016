@@ -9,11 +9,30 @@
 
 			<!-- Optional theme -->
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+
+			<script src="https://use.fontawesome.com/f07b6d1a4f.js"></script>
 		</wicket:head>
 	</head>
 	<body>
-		<wicket:child>
-		</wicket:child>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand">チャット2016</a>
+			</div>
+			<ul class="nav navbar-nav">
+<!-- 				<li class="active"><a wicket:id="toMenuPage">メニュー</a></li> -->
+				<li class="active"><a wicket:id="signUp">サインアップ</a></li>
+				<li class="active"><a wicket:id="signIn">サインイン</a></li>
+				<li class="active"><a wicket:id="logout">サインアウト</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a style="color: white" wicket:id="hello"></a></li>
+			</ul>
+		</div>
+	</nav>
+
+		<wicket:child />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

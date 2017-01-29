@@ -30,8 +30,28 @@ public class AccountDAO {
 	/**
 	 * 挿入メソッド
 	 */
-	public void insert() {
+	public int insert(String name, String password, boolean isAdmin) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("insert into Account(name, password, isadmin) ");
+		sql.append("values(?,?,?) ");
 
+		int ret = 0;
+
+		try(Connection conn = DriverManager.getConnection(DBSettingDefinition.URL,
+				DBSettingDefinition.USER, DBSettingDefinition.PASS)){
+			try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+
+				pstmt.setString(1, name);
+				pstmt.setString(2, password);
+				pstmt.setBoolean(3, isAdmin);
+
+				ret = pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ret;
 	}
 
 	/**
@@ -93,27 +113,27 @@ public class AccountDAO {
 		return account;
 	}
 
-	public boolean existsAccount(String name, String password){
+	public boolean existsAccount(String name){
 		StringBuilder sql = new StringBuilder();
 		sql.append("select * ");
 		sql.append("from account ");
 		sql.append("where name = ? ");
-		sql.append("and password = ? ");
+
+		boolean ret = false;
 
 		try(Connection conn = DriverManager.getConnection(DBSettingDefinition.URL,
 				DBSettingDefinition.USER, DBSettingDefinition.PASS)){
 			try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
 
 				pstmt.setString(1, name);
-				pstmt.setString(2, password);
 
 				try(ResultSet results = pstmt.executeQuery()){
-					return results.next();
+					ret = results.next();
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return ret;
 	}
 }

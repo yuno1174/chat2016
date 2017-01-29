@@ -2,11 +2,13 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
 <meta charset="utf-8" />
-<title>チャット2016・ログイン</title>
+<title>チャット2016・メイン</title>
 </head>
 <body>
 	<wicket:extend>
-		<h2 style="text-align:center">サインイン</h2>
+
+		<h2 style="text-align:center">サインアップ</h2>
+
 		<form style="width:80%; margin:auto;" wicket:id="form">
 			<div class="form-group">
 				<label>name : </label>
@@ -16,9 +18,15 @@
 				<label>password : </label>
 				<input type="password" wicket:id="password" class="form-control" /> <br />
 			</div>
+			<div class="form-group">
+				<label>repassword : </label>
+				<input type="password" wicket:id="repassword" class="form-control" /> <br />
+			</div>
+
 			<div wicket:id="feedback" style="color:red;"></div>
-			<button wicket:id="submit" class="btn btn-default">サインイン</button>
+			<button wicket:id="submit" class="btn btn-default">サインアップ</button>
 		</form>
+
 	</wicket:extend>
 </body>
 </html>

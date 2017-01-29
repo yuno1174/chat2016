@@ -106,12 +106,12 @@ public class MainPage extends ChatCommonPage {
 
 
 
-		messageContainer.add(messageReloadLink);
 		messageContainer.add(messageListView);
 
 		form.add(text);
 		form.add(submit);
 
+		this.add(messageReloadLink);
 		this.add(messageContainer);
 		this.add(form);
 

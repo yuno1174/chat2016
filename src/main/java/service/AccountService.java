@@ -21,8 +21,17 @@ public class AccountService implements IAccountService {
 	}
 
 	@Override
-	public int insert() {
-		return 0;
+	public int insert(String name, String password, boolean isAdmin){
+
+		int ret = 0;
+		if(!name.isEmpty() && !password.isEmpty()){
+			try {
+				return new AccountDAO().insert(name, password, isAdmin);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return ret;
 	}
 
 	@Override
@@ -36,10 +45,10 @@ public class AccountService implements IAccountService {
 	}
 
 	@Override
-	public Account select(String id, String password) {
-		if(!id.isEmpty() && !password.isEmpty()){
+	public Account select(String name, String password) {
+		if(!name.isEmpty() && !password.isEmpty()){
 			try {
-				return new AccountDAO().select(id, password);
+				return new AccountDAO().select(name, password);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -48,10 +57,10 @@ public class AccountService implements IAccountService {
 	}
 
 	@Override
-	public boolean existsAccount(String id, String pass) {
-		if(!id.isEmpty() && !pass.isEmpty()){
+	public boolean existsAccount(String name) {
+		if(!name.isEmpty()){
 			try {
-				return new AccountDAO().existsAccount(id, pass);
+				return new AccountDAO().existsAccount(name);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
